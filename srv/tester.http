@@ -1,0 +1,116 @@
+###Get the service document
+
+http://localhost:4004/odata/v4/CatalogService
+
+###Get the metadata service document
+http://localhost:4004/odata/v4/CatalogService/$metadata
+###Get the employee entity set
+
+http://localhost:4004/odata/v4/CatalogService/Employeeset
+
+###To get the single employee details based on PK.
+http://localhost:4004/odata/v4/CatalogService/Employeeset/02BD2137-0890-1EEA-A6C2-BB55C19787FB
+
+###To know the count of employee recordss
+
+http://localhost:4004/odata/v4/CatalogService/Employeeset/$count
+
+//Pagination.
+
+###Get the top 2 records.
+
+http://localhost:4004/odata/v4/CatalogService/Employeeset?$top=2
+
+###Skip frst 2 records.
+
+http://localhost:4004/odata/v4/CatalogService/Employeeset?$skip=2
+
+###get top 2 and skip remaining
+http://localhost:4004/odata/v4/CatalogService/Employeeset?$top=2&$skip=5
+
+//filtering based on conditions.
+
+###Get employee details based on bank name.
+
+http://localhost:4004/odata/v4/CatalogService/Employeeset?$filter=bankName eq 'My Bank of Antioch'
+
+###Pattern based filtering
+
+http://localhost:4004/odata/v4/CatalogService/Employeeset?$filter=contains(nameFirst,'Su')
+
+###Select particular columns or fields using select query
+http://localhost:4004/odata/v4/CatalogService/Employeeset?$select=nameFirst,nameLast,loginName
+
+###Create new employee with our payload data - POST
+
+POST http://localhost:4004/odata/v4/CatalogService/Employeeset
+Content-Type: application/json
+
+{
+ "nameFirst": "Christiano",
+ "nameMiddle": "M",
+ "nameLast": "Ronaldo",
+ "nameInitials": null,
+ "sex": "M",
+ "language": "E",
+ "phoneNumber": "+918810504555",
+ "email": "christinoronaldo@itelo.info",
+ "loginName": "CRONAL",
+ "Currency_code": "USD",
+ "salaryAmount": 100000,
+ "accountNumber": "111222000",
+ "bankId": "5100000",
+ "bankName": "My Bank of Antioch"
+}
+
+###Update employee data -PATCH
+PATCH http://localhost:4004/odata/v4/CatalogService/Employeeset/054f1cf5-97a5-4b9f-bc92-0d957827d82d
+Content-Type: application/json
+
+{
+    "salaryAmount" : 500,
+    "Currency_code" : "USD"
+}
+
+###Delete employee data - DELETE
+DELETE http://localhost:4004/odata/v4/CatalogService/Employeeset/6b17ac10-63da-46f9-8c8c-c07724aafb43
+
+
+
+
+###get the data from the cds view
+
+http://localhost:4004/odata/v4/CatalogService/Products
+
+###load single product by id
+http://localhost:4004/odata/v4/CatalogService/Products/74867AD200E41EDBA5D8B06B26EB4052
+
+###Get the order where this product was used - Lazy loading
+
+http://localhost:4004/odata/v4/CatalogService/Products/74867AD200E41EDBA5D8B06B26EB4052/To_Items
+
+###Get product and item data together in a single call
+http://localhost:4004/odata/v4/CatalogService/Products/74867AD200E41EDBA5D8B06B26EB4052?$expand=To_Items
+
+
+###get all PO
+http://localhost:4004/odata/v4/CatalogService/POs
+###get single PO
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052
+###get PO with its items
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052?$expand=Items
+
+###for bosting get a POs.
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052
+
+###boosting
+
+POST http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052/CatalogService.boost
+Content-Type: application/json
+
+{}
+
+###Getting largest order 
+
+GET http://localhost:4004/odata/v4/CatalogService/largestOrder()
+
