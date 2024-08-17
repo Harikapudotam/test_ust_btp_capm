@@ -21,6 +21,8 @@
   },
   "scripts": {
     "start": "cds-serve",
+    "deploy": "cds deploy --to hana:motu --profile hybrid",
+    "run": "cds watch --profile hybrid",
     "watch-purchaseorderapp": "cds watch --open purchaseorderapp/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
@@ -28,8 +30,7 @@
   ],
   "cds": {
     "requires": {
-      "db": "hana",
-      "auth": "xsuaa"
+      "db": "hana"
     }
   }
 }
